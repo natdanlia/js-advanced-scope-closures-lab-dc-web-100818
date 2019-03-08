@@ -1,36 +1,27 @@
-function produceDrivingRange(maxBlock) {
-  return function (givenBlock1,givenBlock2) {
-
-
-      givenBlockInt1 = parseInt(givenBlock1.slice(0,givenBlock1.length -2))
-
-      givenBlockInt2 = parseInt(givenBlock2.slice(0,givenBlock2.length -2))
-
-      let editBlock =  givenBlockInt2 - givenBlockInt1
-
-    debugger;
-    if (maxBlock > editBlock) {
-      return `within range by ${maxBlock - editBlock}`;
+function produceDrivingRange(delta) {
+  return function (blockA, blockB) {
+    let A = parseInt(blockA.slice(0,-2))
+    let B = parseInt(blockB.slice(0,-2))
+    if ((B-A) > delta) {
+      return `${(B-A) - delta } blocks out of range`
     } else {
-      return `${editBlock - maxBlock} blocks out of range`;
+      return `within range by ${delta - (B - A)}`
     }
-  };
+  }
 }
 
 
-function produceTipCalculator(tipPercent) {
-  return function (foodPrice) {
-   return (foodPrice * tipPercent)
-  };
+function produceTipCalculator(percent) {
+  return price => price * percent
 }
 
 function createDriver() {
-  let id = 0
-  return class {
+  let driverId = 0
+  // debugger
+  return class Driver{
     constructor(name) {
       this.name = name
-      this.id = ++id
+      this.id = driverId ++
     }
   }
-
 }
